@@ -1,12 +1,13 @@
-import sweetAgent from './index'
-const request = sweetAgent()
+import sweetAxios from './index'
+import Swal from 'sweetalert2'
+const request = sweetAxios()
 
-//import request from 'axios'
-
+//get
 document.getElementById('test').addEventListener('click', () => {
   request.get('/test.json').then(console.log)
 })
 
+//post
 document.getElementById('post').addEventListener('click', () => {
   const input = document.getElementById('file')
   if (!input.files.length) {
@@ -21,4 +22,12 @@ document.getElementById('post').addEventListener('click', () => {
       'Content-Type': 'multipart/form-data'
     }
   }).then(console.log)
+})
+
+//error handle
+document.getElementById('error').addEventListener('click', () => {
+  request.get('/not-exist.json').then(console.log).catch(e=>{
+    Swal.close()
+    Swal('Error',e.toString())
+  })
 })

@@ -13,7 +13,6 @@ module.exports = ()=>{
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
       compress: false,
-      port: 9000,
       setup(app){
         app.post('/post',(req,res)=>res.json({done:true}))
       }

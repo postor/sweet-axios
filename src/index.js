@@ -6,20 +6,18 @@ const bind = (fn, swalConfig = {}) => {
   return (...args) => {
     const {
       start = () => Swal({
-        title: 'loading...',
+        title: 'please wait',
         text: 'starting request...',
         onBeforeOpen: () => {
           Swal.showLoading()
         },
       }),
       progress = progressEvent => {
-        Swal.getContent().textContent = `request progress ${((progressEvent.loaded * 100) / progressEvent.total).toFixed()}%`
-        console.log(`request progress ${((progressEvent.loaded * 100) / progressEvent.total).toFixed()}%`)
+        Swal.getContent().textContent = `progress ${((progressEvent.loaded * 100) / progressEvent.total).toFixed()}%`
       },
       end = () => Swal.close()
     } = swalConfig
     start()
-
 
     const lastArgs = args[args.length - 1]
     const newArgs = isString(lastArgs)
